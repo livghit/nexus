@@ -12,61 +12,56 @@
 
     @vite(['resources/css/app.css'])
 </head>
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
-<div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-    <div
-        class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-        <div class="absolute top-0 left-0 right-0 w-full max-w-2xl px-6 lg:max-w-7xl">
-            <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                @if(Auth::user())
-                    <a
-                        href="{{ route('article.index') }}"
-                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                    >
-                        Articles
-                    </a>
-                @endif
+<body class="font-sans antialiased dark:bg-black dark:text-white/50 p-5">
+<header class="grid grid-cols-2 items-center gap-2 py-10 ">
+    @if(Auth::user())
+        <a
+            href="{{ route('articles') }}"
+            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+        >
+            Articles
+        </a>
+    @endif
+
+    @if (Route::has('login'))
+        <nav class="-mx-3 flex flex-1 justify-end">
+            <a
+                href="{{ route('public.articles') }}"
+                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+            >
+                Public Blog Articles
+            </a>
+            @auth
                 <a
-                    href="{{ route('public.articles') }}"
+                    href="{{ url('/dashboard') }}"
                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                 >
-                    Public Blog Articles
+                    Dashboard
                 </a>
-                @if (Route::has('login'))
-                    <nav class="-mx-3 flex flex-1 justify-end">
-                        @auth
-                            <a
-                                href="{{ url('/dashboard') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
-                                Dashboard
-                            </a>
-                        @else
-                            <a
-                                href="{{ route('login') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
-                                Log in
-                            </a>
+            @else
+                <a
+                    href="{{ route('login') }}"
+                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                >
+                    Log in
+                </a>
 
-                            @if (Route::has('register'))
-                                <a
-                                    href="{{ route('register') }}"
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                >
-                                    Register
-                                </a>
-                            @endif
-                        @endauth
-                    </nav>
+                @if (Route::has('register'))
+                    <a
+                        href="{{ route('register') }}"
+                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                    >
+                        Register
+                    </a>
                 @endif
-            </header>
+            @endauth
+        </nav>
+    @endif
+</header>
 
-            <main class="mt-6">
+<main>
+    <x-welcome/>
+</main>
 
-            </main>
-        </div>
-    </div>
-</div>
 </body>
 </html>

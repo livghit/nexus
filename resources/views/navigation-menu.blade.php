@@ -114,6 +114,12 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
+                            @if(Auth::user()->email == "livghit@gmail.com")
+                                <x-dropdown-link href="{{ route('articles.create') }}">
+                                    {{ __('Create Article') }}
+                                </x-dropdown-link>
+                            @endif
+
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}

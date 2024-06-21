@@ -1,13 +1,10 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 Route::middleware([
     'auth:sanctum',
@@ -19,5 +16,4 @@ Route::middleware([
     })->name('dashboard');
 });
 
-
-require __DIR__ . '/article.php';
+require __DIR__.'/article.php';
