@@ -6,7 +6,6 @@
     </x-slot>
 
     <div class="p-5">
-        <p class="mb-10">Articles :</p>
         <div class="grid grid-cols-4 gap-5">
             @foreach($articles as $article)
                 <x-article-card :article="$article"/>

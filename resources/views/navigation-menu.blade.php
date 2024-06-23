@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="flex gap-2 dark:text-white justify-center align-middle">
+                    <a href="{{ url('/') }}" class="flex gap-2 dark:text-white justify-center align-middle">
                         <x-application-mark class="block h-9 w-auto"/>
                         <p class="text-xl mt-2 text-indigo-400 font-semibold">{{config('app.name')}}</p>
                     </a>
