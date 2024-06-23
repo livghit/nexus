@@ -24,7 +24,7 @@ class ArticleController extends Controller
     public function create(): View|RedirectResponse
     {
         // Maybe move this into Article policies
-        if (!auth()->user()->can('create')) {
+        if (!auth()->user()->can('create-articles')) {
             return redirect()->route('articles')->withErrors('You do not have permission to create articles.');
         }
         return view('article.create');

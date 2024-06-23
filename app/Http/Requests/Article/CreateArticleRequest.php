@@ -12,7 +12,7 @@ class CreateArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->can('create-post');
+        return auth()->user()->can('create-articles');
     }
 
     /**

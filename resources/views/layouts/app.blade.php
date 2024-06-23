@@ -34,12 +34,12 @@
 
     @if($errors->any())
         @foreach($errors->all() as $error)
-            <p>{{$error}}</p>
+            <x-error :message="$error"/>
         @endforeach
     @endif
 
     @if(session('success'))
-        <p>{{session('success')}}</p>
+        <x-success :message="session('success')"/>
     @endif
 
     <!-- Page Content -->
