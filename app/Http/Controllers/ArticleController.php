@@ -12,22 +12,26 @@ class ArticleController extends Controller
 {
     public function index(): View
     {
-        return view('article.index', ['articles' => Article::all()]);
+        return view("article.index", [
+            "articles" => Article::all()->sortByDesc("created_at"),
+        ]);
     }
 
     public function show(Article $article): View
     {
         //TODO: implement this so it searches in the respective directory for an posted blog
-        return view('article.show', ['article' => $article]);
+        return view("article.show", ["article" => $article]);
     }
 
     public function create(): View|RedirectResponse
     {
         // Maybe move this into Article policies
-        if (!auth()->user()->can('create-articles')) {
-            return redirect()->route('articles')->withErrors('You do not have permission to create articles.');
+        if (!auth()->user()->can("create-articles")) {
+            return redirect()
+                ->route("articles")
+                ->withErrors("You do not have permission to create articles.");
         }
-        return view('article.create');
+        return view("article.create");
     }
 
     public function save(CreateArticleRequest $request)
@@ -37,9 +41,11 @@ class ArticleController extends Controller
         $article->fill($validData);
 
         if (!$article->save()) {
-            return redirect()->back()->withErrors('We were not able to save the article.');
+            return redirect()
+                ->back()
+                ->withErrors("We were not able to save the article.");
         }
 
-        return redirect()->back()->with('success', 'Article created.');
+        return redirect()->back()->with("success", "Article created.");
     }
 }

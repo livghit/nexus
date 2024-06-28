@@ -20,8 +20,8 @@
                     id="public"
                     class="mt-1.5 w-xs rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                 >
-                    <option value="0">Public</option>
-                    <option value="1">Private</option>
+                    <option value="1">Public</option>
+                    <option value="0">Private</option>
                 </select>
 
                 <x-button type="submit" class="ml-auto">Save</x-button>

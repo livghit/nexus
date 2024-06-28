@@ -1,13 +1,8 @@
 <div>
     <article
-        class="hover:animate-background rounded-xl bg-gradient-to-r from-indigo-500 via-blue-500 to-red-600 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_10s]"
+        class="hover:animate-background rounded-xl bg-gradient-to-r from-indigo-400 via-blue-400 to-red-400 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_10s]"
     >
-        <div class="flex gap-2 justify-end">
-            <span>Dislike</span>
-            <span>Funny</span>
-            <span>Funny</span>
-        </div>
-        <div class="rounded-[10px] bg-white p-4 !pt-20 sm:p-6">
+                <div class="rounded-[10px] bg-white p-4 !pt-20 sm:p-6">
             <a href="article/{{$article->path}}">
                 <h3 class="mt-0.5 text-lg font-medium text-gray-900">
                     {{$article->title}}
@@ -23,6 +18,28 @@
                                 {{$article->description}}
               </span>
             </div>
+
+            <div class="relative w-full bottom-0 right-0 mt-5 flex gap-3 text-xl">
+                        @php
+                        $reactions = [
+                            [
+                                'name' => 'funny',
+                                'smiley' => '😂',
+                            ],
+                            [
+                                'name' => 'love',
+                                'smiley' => '❤️',
+                            ],
+                            [
+                                'name' => 'dislike',
+                                'smiley' => '👎'
+                            ]
+                        ];
+                        @endphp
+                        @foreach($reactions as $reaction)
+                            <button>{{$reaction['smiley']}}</button>
+                        @endforeach
+                    </div>
         </div>
     </article>
 </div>

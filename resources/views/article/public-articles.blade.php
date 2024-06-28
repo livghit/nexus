@@ -25,7 +25,7 @@
         </h2>
     </div>
 </header>
-<div class="p-5 grid grid-cols-4 gap-5">
+<div class="p-5 grid grid-cols-1 sm:grid-cols-4 gap-5">
     @foreach($articles as $article)
         <x-article-card :article="$article"/>
     @endforeach
