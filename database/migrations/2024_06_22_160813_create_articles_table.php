@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,13 +15,15 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->boolean('public');
-            $table->foreignId('hashtag_id')->constrained();
+            $table->foreignId('hashtag_id')->nullable()->constrained();
             $table->timestamps();
         });
 
         Schema::create('hashtags', function (Blueprint $table) {
             $table->id();
             $table->string('tag');
+            $table->foreignId('article_id')->nullable()->constrained();
+            $table->timestamps();
         });
     }
 

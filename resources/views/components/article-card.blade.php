@@ -14,7 +14,8 @@
                 @foreach ($article->hashtags as $hashtag)
                     <span
                         class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-xs text-purple-600 border border-red-600">
-                        {{ $hashtag }}
+                        {{ $hashtag->tag }}
+                        {{ $hashtag->reactions}}
                     </span>
                 @endforeach
             </div>

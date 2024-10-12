@@ -7,6 +7,7 @@ use App\Http\Requests\Article\CreateArticleRequest;
 use App\Http\Requests\ReactToArticleRequest;
 use App\Models\Article;
 use App\Models\Hashtag;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -25,34 +26,40 @@ class ArticleController extends Controller
         return view('article.show', ['article' => $article]);
     }
 
+    public function save(CreateArticleRequest $request)
+    {
+        $validData = $request->validated(); // Validated data
+        $article = new Article();           // Create a new article
+
+        // Fill the article model with validated data
+        $article->fill($validData);
+
+        // Save the article
+        if (!$article->save()) {
+            return redirect()
+                ->back()
+                ->withErrors('We were not able to save the article.');
+        }
+
+        foreach ($validData['hashtags'] ?? [] as $tag) {
+            $article->hashtags()->create([
+                'tag' => $tag,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Article created.');
+    }
+
     public function create(): View|RedirectResponse
     {
         // Maybe move this into Article policies
-        if (! auth()->user()->can('create-articles')) {
+        if (!auth()->user()->can('create-articles')) {
             return redirect()
                 ->route('articles')
                 ->withErrors('You do not have permission to create articles.');
         }
 
         return view('article.create');
-    }
-
-    public function save(CreateArticleRequest $request)
-    {
-        $validData = $request->validated();
-        $article = new Article();
-        $hastag = new Hashtag();
-
-        $hastag->fill($validData->hashtag);
-        $article->fill($validData);
-
-        if (! $article->save()) {
-            return redirect()
-                ->back()
-                ->withErrors('We were not able to save the article.');
-        }
-
-        return redirect()->back()->with('success', 'Article created.');
     }
 
     public function react(ReactToArticleRequest $request)
